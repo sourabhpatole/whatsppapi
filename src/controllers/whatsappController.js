@@ -3,7 +3,7 @@ const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
 const VerifyToken = (req, res) => {
   try {
     let accessToken =
-      "EAAIvPYSLqTIBABqHBFIrq2Nb8OmJZBY8tCZCSqZCZAt8uZBgZAlqsJ7oTuyZCfMKR2xoNXRlVButNXiMUEusPupPs2YeWLB4i1hZAaRL8uZCusDfmrygmSiZBfho8UpSyKSmwScqiHfZA5twiGR6gyo7fYLw1DZAZBfX7bwgmAfZAgNLMWdBE3No5WZCWgdJRkTFr4p05ZBotErRYFuPfQZDZD";
+      "EAAIvPYSLqTIBAOAq7IoKaq1mN20nsYZC5mRBc0DeyGGI3bdr9o6OPncZAdYVUZB5ZCK8IG4JZCksvZCGNoz7XJmJZAz3aEBYYUmAbIqnZBOFLNUXwS8TfoEBlZACNXfpcfETEXw1Gja4jdGbBFcsMyhkOJ3SOE08gXQnMpYeSSdDz3RImCmnToZCnC1lNl0f8DD6eZCDzIDBYKG2WcX4bYxucUn2IsE6uvWrxsZD";
     let token = req.query["hub.verify_token"];
     let challenge = req.query["hub.challenge"];
     if (challenge != null && token != null && token == accessToken) {
