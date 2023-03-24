@@ -18,17 +18,38 @@ const VerifyToken = (req, res) => {
 };
 
 const ReceiveMessage = (req, res) => {
-  // res.send("Hello receive message");
   try {
     let entry = req.body["entry"][0];
     let changes = entry["changes"][0];
     let value = changes["value"];
     let messageObject = value["messages"];
-    myConsole.log(messageObject);
+    // myConsole.log(messageObject);
+    let message = messageObject[0];
+    let text = GetTextUser();
     res.send("EVENT_RECEIVED");
   } catch (error) {
-    myConsole.log(messageObject);
+    myConsole.log(error);
     res.send("EVENT_RECEIVED");
   }
+};
+const GetTextUser = (message) => {
+  let text = "";
+  let typeMessage = message["type"];
+  if (typeMessage == "text") {
+    text = message["text"]["body"];
+  } else if (typeMessage == "interactive") {
+    let interactiveObject = message["interactive"];
+    let typeInteractive = interactiveObject["type"];
+    if (typeInteractive == "button_replay") {
+      text = interactiveObject["button_replay"]["title"];
+    } else if (typeMessage == "list_replay") {
+      text = interactiveObject["list_replay"]["title"];
+    } else {
+      console.log("No Message");
+    }
+  } else {
+    console.log("No Message");
+  }
+  return text;
 };
 module.exports = { ReceiveMessage, VerifyToken };
