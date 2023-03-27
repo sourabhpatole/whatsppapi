@@ -25,21 +25,21 @@ const ReceiveMessage = (req, res) => {
     let value = changes["value"];
     let messageObject = value["messages"];
     // myConsole.log(messageObject);
-    let message = messageObject[0];
-    let text = GetTextUser();
+    let messages = messageObject[0];
+    let text = GetTextUser(messages);
     res.send("EVENT_RECEIVED");
   } catch (error) {
     myConsole.log(error);
     res.send("EVENT_RECEIVED");
   }
 };
-const GetTextUser = (message) => {
+const GetTextUser = (messages) => {
   let text = "";
-  let typeMessage = message["type"];
+  let typeMessage = messages["type"];
   if (typeMessage == "text") {
-    text = message["text"]["body"];
+    text = messages["text"]["body"];
   } else if (typeMessage == "interactive") {
-    let interactiveObject = message["interactive"];
+    let interactiveObject = messages["interactive"];
     let typeInteractive = interactiveObject["type"];
     if (typeInteractive == "button_replay") {
       text = interactiveObject["button_replay"]["title"];
